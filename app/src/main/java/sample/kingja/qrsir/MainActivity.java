@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.kingja.qrsir.ScanActivity;
 import com.kingja.qrsir.encoder.QRCodeEncoder;
 
 public class MainActivity extends AppCompatActivity {

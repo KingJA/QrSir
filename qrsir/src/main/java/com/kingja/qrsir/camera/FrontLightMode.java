@@ -18,7 +18,7 @@ package com.kingja.qrsir.camera;
 
 import android.content.SharedPreferences;
 
-import com.kingja.qrsir.PreferencesActivity;
+import com.kingja.qrsir.Config;
 
 
 /**
@@ -38,7 +38,7 @@ public enum FrontLightMode {
   }
 
   public static FrontLightMode readPref(SharedPreferences sharedPrefs) {
-    return parse(sharedPrefs.getString(PreferencesActivity.KEY_FRONT_LIGHT_MODE, OFF.toString()));
+    return parse(sharedPrefs.getString(Config.KEY_FRONT_LIGHT_MODE, OFF.toString()));
   }
 
 }

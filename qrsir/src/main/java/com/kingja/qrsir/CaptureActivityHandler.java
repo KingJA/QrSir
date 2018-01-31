@@ -16,21 +16,15 @@
 
 package com.kingja.qrsir;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.DecodeHintType;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;
+import com.kingja.qrsir.callback.ContextCallback;
 import com.kingja.qrsir.camera.CameraManager;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.
@@ -40,8 +34,7 @@ import java.util.Map;
 public final class CaptureActivityHandler extends Handler {
 
     private static final String TAG = CaptureActivityHandler.class.getSimpleName();
-
-    private final ScanActivity activity;
+    private final ContextCallback activity;
     private final DecodeThread decodeThread;
     private State state;
     private final CameraManager cameraManager;
@@ -63,7 +56,6 @@ public final class CaptureActivityHandler extends Handler {
         } catch (InterruptedException e) {
             // continue
         }
-
         // Be absolutely sure we don't send any queued up messages
         removeMessages(R.id.decode_succeeded);
         removeMessages(R.id.decode_failed);
@@ -76,11 +68,8 @@ public final class CaptureActivityHandler extends Handler {
             Result result = (Result) message.obj;
             ParsedResult parsedResult = ResultParser.parseResult(result);
             String finalResult = parsedResult.getDisplayResult().replace("\r", "");
-            Log.e(TAG, "finalResult: "+finalResult);
-            Intent intent = new Intent();
-            intent.putExtra("result", finalResult);
-            activity.setResult(Activity.RESULT_OK, intent);
-            activity.finish();
+            Log.e(TAG, "finalResult: " + finalResult);
+            activity.setResult(finalResult);
         } else if (what == R.id.decode_failed) {
             state = State.PREVIEW;
             cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
@@ -88,19 +77,12 @@ public final class CaptureActivityHandler extends Handler {
             restartPreviewAndDecode();
         } else if (what == R.id.return_scan_result) {
             Log.e(TAG, "return_scan_result: ");
-            activity.setResult(Activity.RESULT_OK, (Intent) message.obj);
-            activity.finish();
         }
     }
 
-    CaptureActivityHandler(ScanActivity activity,
-                           Collection<BarcodeFormat> decodeFormats,
-                           Map<DecodeHintType, ?> baseHints,
-                           String characterSet,
-                           CameraManager cameraManager) {
+    CaptureActivityHandler(QrSir activity, CameraManager cameraManager) {
         this.activity = activity;
-        decodeThread = new DecodeThread(activity, decodeFormats, baseHints, characterSet,
-                new ViewfinderResultPointCallback(activity.getViewfinderView()));
+        decodeThread = new DecodeThread(activity);
         decodeThread.start();
         state = State.SUCCESS;
 

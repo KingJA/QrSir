@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
 
-    <com.kingja.qrsir.ViewfinderView
+    <com.kingja.qrsir.ScanView
         android:id="@+id/viewfinder_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
