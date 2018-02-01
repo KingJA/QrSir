@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kingja.qrsir;
+package com.kingja.qrsir.decode;
 
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +23,8 @@ import android.util.Log;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ResultParser;
+import com.kingja.qrsir.QrSir;
+import com.kingja.qrsir.R;
 import com.kingja.qrsir.callback.ContextCallback;
 import com.kingja.qrsir.camera.CameraManager;
 
@@ -80,7 +82,7 @@ public final class CaptureActivityHandler extends Handler {
         }
     }
 
-    CaptureActivityHandler(QrSir activity, CameraManager cameraManager) {
+  public   CaptureActivityHandler(QrSir activity, CameraManager cameraManager) {
         this.activity = activity;
         decodeThread = new DecodeThread(activity);
         decodeThread.start();

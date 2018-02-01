@@ -2,7 +2,6 @@ package com.kingja.qrsir.callback;
 
 import android.os.Handler;
 
-import com.kingja.qrsir.ScanView;
 import com.kingja.qrsir.camera.CameraManager;
 
 
@@ -15,9 +14,9 @@ import com.kingja.qrsir.camera.CameraManager;
 public interface ContextCallback {
     Handler getHandler();
 
-    ScanView getScanView();
-
     CameraManager getCameraManager();
+
     void drawViewfinder();
+
     void setResult(String result);
 }

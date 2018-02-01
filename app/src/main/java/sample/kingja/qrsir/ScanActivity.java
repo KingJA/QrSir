@@ -7,7 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.kingja.qrsir.QrSir;
-import com.kingja.qrsir.ScanView;
+import com.kingja.qrsir.view.ScanView;
 
 /**
  * Description:TODO
@@ -24,10 +24,11 @@ public class ScanActivity extends AppCompatActivity {
         //保持常亮
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(com.kingja.qrsir.R.layout.activity_scan);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_scan);
 
-        ScanView scanView = findViewById(com.kingja.qrsir.R.id.viewfinder_view);
-        SurfaceView surfaceView = findViewById(com.kingja.qrsir.R.id.preview_view);
+        ScanView scanView = findViewById(R.id.viewfinder_view);
+        SurfaceView surfaceView = findViewById(R.id.preview_view);
         qrSir = QrSir.getQrSir(this, scanView, surfaceView);
     }
 

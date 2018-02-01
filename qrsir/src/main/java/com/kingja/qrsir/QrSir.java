@@ -9,16 +9,18 @@ import android.view.SurfaceView;
 
 import com.kingja.qrsir.callback.ContextCallback;
 import com.kingja.qrsir.camera.CameraManager;
+import com.kingja.qrsir.decode.CaptureActivityHandler;
+import com.kingja.qrsir.view.ScanView;
 
 
 /**
  * Description:TODO
  * Create Time:2018/1/31 16:26
- * Author:KingJA
+ * @author:KingJA
  * Email:kingjavip@gmail.com
  */
-public class QrSir implements SurfaceHolder.Callback ,ContextCallback{
-    private static final String TAG = "QrSir";
+public class QrSir implements SurfaceHolder.Callback, ContextCallback {
+    private final String TAG = "QrSir";
     private ScanView scanView;
     private final SurfaceView surfaceView;
     private boolean hasSurface;
@@ -33,12 +35,16 @@ public class QrSir implements SurfaceHolder.Callback ,ContextCallback{
     }
 
 
-    public static QrSir getQrSir(Activity qrActivity, ScanView scanView, SurfaceView surfaceView ) {
-        return new QrSir(qrActivity, scanView,surfaceView);
+    public static QrSir getQrSir(Activity qrActivity, ScanView scanView, SurfaceView surfaceView) {
+        return new QrSir(qrActivity, scanView, surfaceView);
     }
 
     public void onResume() {
         cameraManager = new CameraManager(activity.getApplication());
+//        /*设置扫描框尺寸*/
+//        cameraManager.setManualFramingRect(200, 200);
+//        /*选择相机 前1后0 CameraInfo.CAMERA_FACING_BACK*/
+//        cameraManager.setManualCameraId(-1);
         scanView.setCameraManager(cameraManager);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         if (hasSurface) {
@@ -102,16 +108,11 @@ public class QrSir implements SurfaceHolder.Callback ,ContextCallback{
             cameraManager.openDriver(surfaceHolder);
             // Creating the handler starts the preview, which can also throw a RuntimeException.
             if (handler == null) {
-                handler = new CaptureActivityHandler(this,  cameraManager);
+                handler = new CaptureActivityHandler(this, cameraManager);
             }
         } catch (Exception e) {
             Log.w(TAG, e);
         }
-    }
-
-    @Override
-    public ScanView getScanView() {
-        return scanView;
     }
 
     @Override
@@ -123,9 +124,10 @@ public class QrSir implements SurfaceHolder.Callback ,ContextCallback{
     public CameraManager getCameraManager() {
         return cameraManager;
     }
+
     @Override
     public void drawViewfinder() {
-        scanView.drawViewfinder();
+//        scanView.drawViewfinder();
     }
 
     @Override

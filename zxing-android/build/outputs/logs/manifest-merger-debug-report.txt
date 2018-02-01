@@ -112,7 +112,7 @@ ADDED from E:\TDR\QrSir\zxing-android\src\main\AndroidManifest.xml:42:3-141:17
 activity#com.google.zxing.client.android.CaptureActivity
 ADDED from E:\TDR\QrSir\zxing-android\src\main\AndroidManifest.xml:46:5-88:16
 	android:screenOrientation
-		ADDED from E:\TDR\QrSir\zxing-android\src\main\AndroidManifest.xml:47:15-58
+		ADDED from E:\TDR\QrSir\zxing-android\src\main\AndroidManifest.xml:47:15-57
 	android:clearTaskOnLaunch
 		ADDED from E:\TDR\QrSir\zxing-android\src\main\AndroidManifest.xml:48:15-47
 	android:stateNotNeeded

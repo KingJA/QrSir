@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.kingja.qrsir;
+package com.kingja.qrsir.decode;
 
 import android.os.Handler;
 import android.os.Looper;
+
+import com.kingja.qrsir.QrSir;
 
 import java.util.concurrent.CountDownLatch;
 

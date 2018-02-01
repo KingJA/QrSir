@@ -262,11 +262,14 @@ public final class CameraManager {
         // Called early, before init even finished
         return null;
       }
+      Log.e(TAG, "cameraResolution x: "+cameraResolution.x+" cameraResolution y: "+cameraResolution.y  );
+      Log.e(TAG, "screenResolution x: "+screenResolution.x+" screenResolution y: "+screenResolution.y  );
       rect.left = rect.left * cameraResolution.x / screenResolution.x;
       rect.right = rect.right * cameraResolution.x / screenResolution.x;
       rect.top = rect.top * cameraResolution.y / screenResolution.y;
       rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
       framingRectInPreview = rect;
+      Log.e(TAG, "framingRectInPreview: "+framingRectInPreview );
     }
     return framingRectInPreview;
   }

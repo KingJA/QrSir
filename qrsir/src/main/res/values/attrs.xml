@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScanView">
+        <attr name="resultColor" format="reference|color"/>
+        <attr name="maskColor" format="reference|color"/>
+        <attr name="laserColor" format="reference|color"/>
+        <attr name="scanRectRes" format="reference"/>
+        <attr name="scanLineRes" format="reference"/>
+        <attr name="scanDuration" format="integer"/>
+    </declare-styleable>
+
+</resources>
