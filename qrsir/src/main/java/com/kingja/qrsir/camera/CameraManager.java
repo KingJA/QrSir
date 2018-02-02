@@ -43,6 +43,7 @@ public final class CameraManager {
 
   private static final String TAG = CameraManager.class.getSimpleName();
 
+  /*扫描狂的尺寸范围*/
   private static final int MIN_FRAME_WIDTH = 240;
   private static final int MIN_FRAME_HEIGHT = 240;
   private static final int MAX_FRAME_WIDTH = 1200; // = 5/8 * 1920
@@ -51,11 +52,15 @@ public final class CameraManager {
   private final Context context;
   private final CameraConfigurationManager configManager;
   private OpenCamera camera;
+  /*自动对焦*/
   private AutoFocusManager autoFocusManager;
+  /*扫描框*/
   private Rect framingRect;
+  /*扫描区域*/
   private Rect framingRectInPreview;
   private boolean initialized;
   private boolean previewing;
+  /*要求的相机id，默认无偏好*/
   private int requestedCameraId = OpenCameraInterface.NO_REQUESTED_CAMERA;
   private int requestedFramingRectWidth;
   private int requestedFramingRectHeight;
@@ -265,10 +270,15 @@ public final class CameraManager {
       }
       Log.e(TAG, "cameraResolution x: "+cameraResolution.x+" cameraResolution y: "+cameraResolution.y  );
       Log.e(TAG, "screenResolution x: "+screenResolution.x+" screenResolution y: "+screenResolution.y  );
-      rect.left = rect.left * cameraResolution.x / screenResolution.x;
-      rect.right = rect.right * cameraResolution.x / screenResolution.x;
-      rect.top = rect.top * cameraResolution.y / screenResolution.y;
-      rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+//      rect.left = rect.left * cameraResolution.x / screenResolution.x;
+//      rect.right = rect.right * cameraResolution.x / screenResolution.x;
+//      rect.top = rect.top * cameraResolution.y / screenResolution.y;
+//      rect.bottom = rect.bottom * cameraResolution.y / screenResolution.y;
+
+      rect.left = rect.left * cameraResolution.y / screenResolution.x;
+      rect.right = rect.right * cameraResolution.y / screenResolution.x;
+      rect.top = rect.top * cameraResolution.x / screenResolution.y;
+      rect.bottom = rect.bottom * cameraResolution.x / screenResolution.y;
       framingRectInPreview = rect;
       Log.e(TAG, "预览Frame: "+framingRectInPreview );
     }
